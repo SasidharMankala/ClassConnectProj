@@ -1,0 +1,295 @@
+[
+    {
+        "_id": "614d7df2e08a6e9c05f44a72",
+        "thread_title": "Sample Thread 1",
+        "thread_description": "This is the description of the first thread.",
+        "no_of_upvotes": 10,
+        "flag": true,
+        "no_of_replies": 5,
+        "Username": "user1",
+        "replies": [
+            {
+                "_id": "614d7df2e08a6e9c05f44a73",
+                "reply_description": "First reply to Sample Thread 1.",
+                "reply_upvotes": 3,
+                "reply_flag": false,
+                "Username": "reply_user1"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a74",
+                "reply_description": "Second reply to Sample Thread 1.",
+                "reply_upvotes": 2,
+                "reply_flag": true,
+                "Username": "reply_user2"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a75",
+                "reply_description": "Third reply to Sample Thread 1.",
+                "reply_upvotes": 1,
+                "reply_flag": false,
+                "Username": "reply_user3"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a76",
+                "reply_description": "Fourth reply to Sample Thread 1.",
+                "reply_upvotes": 4,
+                "reply_flag": true,
+                "Username": "reply_user4"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a77",
+                "reply_description": "Fifth reply to Sample Thread 1.",
+                "reply_upvotes": 5,
+                "reply_flag": false,
+                "Username": "reply_user5"
+            }
+        ]
+    },
+    {
+        "_id": "614d7df2e08a6e9c05f44a78",
+        "thread_title": "Sample Thread 2",
+        "thread_description": "This is the description of the second thread.",
+        "no_of_upvotes": 5,
+        "flag": false,
+        "no_of_replies": 3,
+        "Username": "user2",
+        "replies": [
+            {
+                "_id": "614d7df2e08a6e9c05f44a79",
+                "reply_description": "First reply to Sample Thread 2.",
+                "reply_upvotes": 2,
+                "reply_flag": true,
+                "Username": "reply_user1"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a7a",
+                "reply_description": "Second reply to Sample Thread 2.",
+                "reply_upvotes": 1,
+                "reply_flag": false,
+                "Username": "reply_user2"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a7b",
+                "reply_description": "Third reply to Sample Thread 2.",
+                "reply_upvotes": 3,
+                "reply_flag": true,
+                "Username": "reply_user3"
+            }
+        ]
+    },
+    {
+        "_id": "614d7df2e08a6e9c05f44a7c",
+        "thread_title": "Sample Thread 3",
+        "thread_description": "This is the description of the third thread.",
+        "no_of_upvotes": 15,
+        "flag": true,
+        "no_of_replies": 8,
+        "Username": "user3",
+        "replies": [
+            {
+                "_id": "614d7df2e08a6e9c05f44a7d",
+                "reply_description": "First reply to Sample Thread 3.",
+                "reply_upvotes": 5,
+                "reply_flag": false,
+                "Username": "reply_user1"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a7e",
+                "reply_description": "Second reply to Sample Thread 3.",
+                "reply_upvotes": 3,
+                "reply_flag": true,
+                "Username": "reply_user2"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a7f",
+                "reply_description": "Third reply to Sample Thread 3.",
+                "reply_upvotes": 2,
+                "reply_flag": false,
+                "Username": "reply_user3"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a80",
+                "reply_description": "Fourth reply to Sample Thread 3.",
+                "reply_upvotes": 4,
+                "reply_flag": true,
+                "Username": "reply_user4"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a81",
+                "reply_description": "Fifth reply to Sample Thread 3.",
+                "reply_upvotes": 1,
+                "reply_flag": false,
+                "Username": "reply_user5"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a82",
+                "reply_description": "Sixth reply to Sample Thread 3.",
+                "reply_upvotes": 3,
+                "reply_flag": true,
+                "Username": "reply_user6"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a83",
+                "reply_description": "Seventh reply to Sample Thread 3.",
+                "reply_upvotes": 2,
+                "reply_flag": false,
+                "Username": "reply_user7"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a84",
+                "reply_description": "Eighth reply to Sample Thread 3.",
+                "reply_upvotes": 3,
+                "reply_flag": true,
+                "Username": "reply_user8"
+            }
+        ]
+    },
+    {
+        "_id": "614d7df2e08a6e9c05f44a85",
+        "thread_title": "Sample Thread 4",
+        "thread_description": "This is the description of the fourth thread.",
+        "no_of_upvotes": 20,
+        "flag": false,
+        "no_of_replies": 12,
+        "Username": "user4",
+        "replies": [
+            {
+                "_id": "614d7df2e08a6e9c05f44a86",
+                "reply_description": "First reply to Sample Thread 4.",
+                "reply_upvotes": 4,
+                "reply_flag": true,
+                "Username": "reply_user1"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a87",
+                "reply_description": "Second reply to Sample Thread 4.",
+                "reply_upvotes": 3,
+                "reply_flag": false,
+                "Username": "reply_user2"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a88",
+                "reply_description": "Third reply to Sample Thread 4.",
+                "reply_upvotes": 2,
+                "reply_flag": true,
+                "Username": "reply_user3"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a89",
+                "reply_description": "Fourth reply to Sample Thread 4.",
+                "reply_upvotes": 5,
+                "reply_flag": false,
+                "Username": "reply_user4"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a8a",
+                "reply_description": "Fifth reply to Sample Thread 4.",
+                "reply_upvotes": 6,
+                "reply_flag": true,
+                "Username": "reply_user5"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a8b",
+                "reply_description": "Sixth reply to Sample Thread 4.",
+                "reply_upvotes": 1,
+                "reply_flag": false,
+                "Username": "reply_user6"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a8c",
+                "reply_description": "Seventh reply to Sample Thread 4.",
+                "reply_upvotes": 3,
+                "reply_flag": true,
+                "Username": "reply_user7"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a8d",
+                "reply_description": "Eighth reply to Sample Thread 4.",
+                "reply_upvotes": 2,
+                "reply_flag": false,
+                "Username": "reply_user8"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a8e",
+                "reply_description": "Ninth reply to Sample Thread 4.",
+                "reply_upvotes": 3,
+                "reply_flag": true,
+                "Username": "reply_user9"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a8f",
+                "reply_description": "Tenth reply to Sample Thread 4.",
+                "reply_upvotes": 4,
+                "reply_flag": false,
+                "Username": "reply_user10"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a90",
+                "reply_description": "Eleventh reply to Sample Thread 4.",
+                "reply_upvotes": 5,
+                "reply_flag": true,
+                "Username": "reply_user11"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a91",
+                "reply_description": "Twelfth reply to Sample Thread 4.",
+                "reply_upvotes": 2,
+                "reply_flag": false,
+                "Username": "reply_user12"
+            }
+        ]
+    },
+    {
+        "_id": "614d7df2e08a6e9c05f44a92",
+        "thread_title": "Sample Thread 5",
+        "thread_description": "This is the description of the fifth thread.",
+        "no_of_upvotes": 8,
+        "flag": true,
+        "no_of_replies": 6,
+        "Username": "user5",
+        "replies": [
+            {
+                "_id": "614d7df2e08a6e9c05f44a93",
+                "reply_description": "First reply to Sample Thread 5.",
+                "reply_upvotes": 2,
+                "reply_flag": true,
+                "Username": "reply_user1"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a94",
+                "reply_description": "Second reply to Sample Thread 5.",
+                "reply_upvotes": 3,
+                "reply_flag": false,
+                "Username": "reply_user2"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a95",
+                "reply_description": "Third reply to Sample Thread 5.",
+                "reply_upvotes": 1,
+                "reply_flag": true,
+                "Username": "reply_user3"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a96",
+                "reply_description": "Fourth reply to Sample Thread 5.",
+                "reply_upvotes": 4,
+                "reply_flag": false,
+                "Username": "reply_user4"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a97",
+                "reply_description": "Fifth reply to Sample Thread 5.",
+                "reply_upvotes": 2,
+                "reply_flag": true,
+                "Username": "reply_user5"
+            },
+            {
+                "_id": "614d7df2e08a6e9c05f44a98",
+                "reply_description": "Sixth reply to Sample Thread 5.",
+                "reply_upvotes": 3,
+                "reply_flag": false,
+                "Username": "reply_user6"
+            }
+        ]
+    }
+]
