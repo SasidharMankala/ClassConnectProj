@@ -1,0 +1,40 @@
+
+
+# dependencies
+classconnect/node_modules
+classconnectserver/node_modules
+classconnect/.pnp
+classconnectserver/.pnp
+classconnect/.pnp.js
+classconnectserver/.pnp.js
+
+# testing
+classconnect/coverage
+classconnectserver/coverage
+
+# production
+
+classconnect/build
+classconnectserver/build
+
+# misc
+classconnect/.DS_Store
+classconnect/.env.local
+classconnect/.env.development.local
+classconnect/.env.test.local
+classconnect/.env.production.local
+
+classconnect/npm-debug.log*
+classconnect/yarn-debug.log*
+classconnect/yarn-error.log*
+
+classconnectserver/.DS_Store
+classconnectserver/.env.local
+classconnectserver/.env.development.local
+classconnectserver/.env.test.local
+classconnectserver/.env.production.local
+
+classconnectserver/npm-debug.log*
+classconnectserver/yarn-debug.log*
+classconnectserver/yarn-error.log*
+
