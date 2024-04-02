@@ -293,3 +293,38 @@
         ]
     }
 ]
+
+
+
+
+
+
+
+
+description
+: 
+"Discussing various software engineering concepts."
+flagged
+: 
+false
+id
+: 
+7028351779
+posted_user
+: 
+"JohnDoe"
+replies
+: 
+(2) [{…}, {…}]
+tags
+: 
+['#concepts, #softwareengineering, #discuss']
+title
+: 
+"Software Engineering Concepts"
+upvotes
+: 
+10
+_id
+: 
+"6609f62c78a625294f667969"
