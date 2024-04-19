@@ -5,6 +5,7 @@ import Login from './pages/loginpage'
 import NotFound from './pages/404';
 import CreateClass from './pages/createClass';
 import AdminPanel from './pages/adminPanel';
+import Register from './pages/register';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path='/createclass' element={<CreateClass/>}/>
       <Route path='/adminpanel' element={<AdminPanel/>}/>
+      <Route path='/register' element={<Register/>}/>
       <Route path="/*" element={<NotFound/>}/>  
       </Routes>
   </div>

@@ -2,20 +2,38 @@ import { AiOutlineUser } from "react-icons/ai";
 import { Button } from 'antd';
 import { backgroundColor } from "./colors";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Logout from './logout'
+import Cookies from 'js-cookie';
 
 function NavBar({ courseIds, selectedCourse, onCourseSelect }) {
     let navigate = useNavigate();
-    const [selectedItemId, setSelectedItemId] = useState('Select a course');
+    const [selectedItemId, setSelectedItemId] = useState();
+    const [userRole,setUserRole] = useState('')
+    const [user, setUser] = useState('')
+
 
     const routeChange = () => {
         let path = `/`;
         navigate(path);
     }
 
+    useEffect(()=>{
+        const user = Cookies.get('email')
+        setUser(user)
+        const role = Cookies.get('role')
+        setUserRole(role)
+    })
+
     const handleCourseChange = (event, courseId) => {
         setSelectedItemId(courseId);
+        console.log(courseId)
         onCourseSelect(courseId);
+    }
+
+    const routetoCreateClass=()=>{
+        let path = '/createclass'
+        navigate(path)
     }
 
     return (
@@ -40,13 +58,13 @@ function NavBar({ courseIds, selectedCourse, onCourseSelect }) {
                     <ul className="navbar-nav d-lg-flex align-items-center">
                         <li className="nav-item dropdown">
                             <a className="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {selectedItemId}
+                                {selectedItemId ? `${selectedItemId.name} - ${selectedItemId.id}` : 'Select a course'}
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 {courseIds.map(courseId => (
-                                    <li key={courseId}>
+                                    <li key={courseId.name}>
                                         <a className={`dropdown-item ${selectedItemId === courseId ? 'active' : ''}`} href="#" onClick={(event) => handleCourseChange(event, courseId)}>
-                                            {courseId}
+                                            {courseId.name} {courseId.id}
                                         </a>
                                     </li>
                                 ))}
@@ -54,7 +72,9 @@ function NavBar({ courseIds, selectedCourse, onCourseSelect }) {
                         </li>
 
                         <li className="nav-item">
-                            <Button className="text-light" type="text" icon={<AiOutlineUser />} onClick={routeChange}>Account</Button>
+                            <Button className="text-light" type="text" icon={<AiOutlineUser />} onClick={routeChange}>{userRole.toUpperCase()}-{user.split('@')[0].toUpperCase()}</Button>
+                            {userRole=='professor' && <Button onClick={routetoCreateClass} className="text-light" type="text">Create a Class</Button>}
+                            <Button onClick={Logout} className="text-light" type="text">Logout</Button>
                         </li>
                     </ul>
                 </div>
