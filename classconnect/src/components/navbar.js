@@ -6,35 +6,46 @@ import { useEffect, useState } from "react";
 import Logout from './logout'
 import Cookies from 'js-cookie';
 
-function NavBar({ courseIds, selectedCourse, onCourseSelect }) {
+function NavBar({ threads, onSelectedCourseChange }) {
     let navigate = useNavigate();
-    const [selectedItemId, setSelectedItemId] = useState();
-    const [userRole,setUserRole] = useState('')
+    const [userRole, setUserRole] = useState('')
     const [user, setUser] = useState('')
+    const [selectedCourse, setSelectedCourse] = useState(null);
 
 
     const routeChange = () => {
-        let path = `/`;
+        let path = `/profile`;
         navigate(path);
     }
 
-    useEffect(()=>{
+    const loginNavigate = () => {
+        let path = '/joinclass'
+        navigate(path)
+    }
+
+    useEffect(() => {
         const user = Cookies.get('email')
         setUser(user)
         const role = Cookies.get('role')
         setUserRole(role)
-    })
+        if (!selectedCourse && threads.length > 0) {
+            setSelectedCourse({ id: threads[0].id, name: threads[0].name });
+            onSelectedCourseChange({ id: threads[0].id, name: threads[0].name });
+        }
+    
+    },[threads, onSelectedCourseChange, selectedCourse])
 
-    const handleCourseChange = (event, courseId) => {
-        setSelectedItemId(courseId);
-        console.log(courseId)
-        onCourseSelect(courseId);
-    }
 
-    const routetoCreateClass=()=>{
+    const routetoCreateClass = () => {
         let path = '/createclass'
         navigate(path)
     }
+
+    const handleCourseSelection = (course) => {
+        setSelectedCourse(course);
+        onSelectedCourseChange(course);
+    };
+
 
     return (
         <nav className="navbar navbar-expand-lg" style={{ backgroundColor: backgroundColor }}>
@@ -58,23 +69,29 @@ function NavBar({ courseIds, selectedCourse, onCourseSelect }) {
                     <ul className="navbar-nav d-lg-flex align-items-center">
                         <li className="nav-item dropdown">
                             <a className="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {selectedItemId ? `${selectedItemId.name} - ${selectedItemId.id}` : 'Select a course'}
+                                {selectedCourse ? `${selectedCourse.name} : ${selectedCourse.id}`  : 'Select a course'}
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {courseIds.map(courseId => (
-                                    <li key={courseId.name}>
-                                        <a className={`dropdown-item ${selectedItemId === courseId ? 'active' : ''}`} href="#" onClick={(event) => handleCourseChange(event, courseId)}>
-                                            {courseId.name} {courseId.id}
+                                {threads.map(thread => (
+                                    <li key={thread.id}>
+                                        <a className='dropdown-item' href="#" onClick={() => handleCourseSelection({ id: thread.id, name: thread.name })}>
+                                            {thread.name} {thread.id}
                                         </a>
                                     </li>
                                 ))}
                             </ul>
+
                         </li>
 
                         <li className="nav-item">
                             <Button className="text-light" type="text" icon={<AiOutlineUser />} onClick={routeChange}>{userRole.toUpperCase()}-{user.split('@')[0].toUpperCase()}</Button>
-                            {userRole=='professor' && <Button onClick={routetoCreateClass} className="text-light" type="text">Create a Class</Button>}
-                            <Button onClick={Logout} className="text-light" type="text">Logout</Button>
+                            {
+                                userRole == 'professor' ?
+                                    <Button onClick={routetoCreateClass} className="text-light" type="text">Create a Class</Button> :
+                                    <Button onClick={loginNavigate} className="text-light" type="text">Join a class</Button>
+                            }
+                            <Logout />
+                            {/* <div  type="text"><Logout className="text-light"/></div> */}
                         </li>
                     </ul>
                 </div>

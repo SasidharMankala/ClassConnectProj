@@ -70,6 +70,7 @@ function CreateClass() {
         console.log(deletebuttonPressed)
     }
 
+
     return (
         <div className="d-flex flex-column flex-md-row align-items-center justify-content-center" style={{ backgroundColor: backgroundColor, minHeight: '100vh' }}>
             <img src="./full_logo.png" alt="Logo" className="img-fluid mx-auto d-block mb-4" />
@@ -96,8 +97,9 @@ function CreateClass() {
                             <button onClick={deletebuttonhandle} className="btn text-white mt-3 w-100" style={{ backgroundColor: '#FA7B7B' }}>
                                 Delete a Class 
                             </button>
-                            <button onClick={Logout} className="btn btn-dark text-white mt-3 ml-3 w-50">
-                                Logout
+                            
+                            <button onClick={routeTohome} className="btn btn-secondary text-white mt-3 w-50" style={{ marginLeft: '0px' }}>
+                                Back to home
                             </button>
                         </div>
 
