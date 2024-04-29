@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
+import ENDPOINT from '../endpoint';
 
 function CreateClassCom() {
     const [courseName, setCourseName] = useState('')
@@ -42,9 +43,14 @@ function CreateClassCom() {
         } else {
             setCourseIdError('');
         }
-        
+        const courses = Cookies.get('courses')
+        console.log('coures', courses)
+        const course = JSON.parse(courses)
+        const courdata ={'id': courseId, 'name':courseName}
+        course.push(courdata)
+        console.log('data', course)
         try {
-            const response = await fetch(`http://localhost:3001/add-course/${univName}/${userEmail}`, {
+            const response = await fetch(`${ENDPOINT}/add-course/${univName}/${userEmail}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ courseId, courseName }),
@@ -52,6 +58,7 @@ function CreateClassCom() {
             const status = await response.text()
             const message = JSON.parse(status)
             setMessage(message.message)
+            Cookies.set('courses', JSON.stringify(course))
         } catch (error) {
             console.log(error)
         }

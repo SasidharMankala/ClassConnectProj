@@ -11,6 +11,16 @@ const courseSchema = new mongoose.Schema({
     }
 });
 
+const courseenrolled = new mongoose.Schema({
+    id: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    }
+})
 
 const userSchema = new mongoose.Schema({
     dynamicFields: {
@@ -30,7 +40,7 @@ const userSchema = new mongoose.Schema({
     },
     students: {
         type: [mongoose.Schema.Types.Mixed],
-        default: []
+        default: [courseenrolled]
     },
     admins: {
         type: [mongoose.Schema.Types.Mixed],

@@ -3,24 +3,24 @@ import { backgroundColor } from "../components/colors";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-
+import ENDPOINT from '../endpoint';
 
 function Register() {
-    const [fname, setfname] = useState('')
-    const [lname, setlname] = useState('')
-    const [email, setemail] = useState('')
-    const [id, setid] = useState('')
-    const [role, setrole] = useState('')
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [passwordError, setPasswordError] = useState("");
-    // const [formData, setformData] = useState([])
-    const [univName, setunivName] = useState('')
-    const [message, setMessage] = useState('')
-    const [univNames, setUnivNames] = useState([])
-    const [retrived, setRetrived] = useState()
-    const [univkeyvalue, setUnivKeyValue] = useState([])
-    let navigate = useNavigate();
+    const [fname, setfname] = useState('');
+    const [lname, setlname] = useState('');
+    const [email, setemail] = useState('');
+    const [id, setid] = useState('');
+    const [role, setrole] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [univName, setunivName] = useState('');
+    const [message, setMessage] = useState('');
+    const [univNames, setUnivNames] = useState([]);
+    const [retrived, setRetrived] = useState();
+    const [univkeyvalue, setUnivKeyValue] = useState([]);
+    const [countdown, setCountdown] = useState(4); // Countdown timer
+    const navigate = useNavigate();
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -42,30 +42,24 @@ function Register() {
     };
 
     useEffect(() => {
-        fetchUnivnames()
-    }, [])
-
-
+        fetchUnivnames();
+    }, []);
 
     const fetchUnivnames = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/univnames')
-            setRetrived(response.data)
+            const response = await axios.get(`${ENDPOINT}/univnames`);
+            setRetrived(response.data);
             const univkeyvalueObj = response.data.reduce((acc, curr) => {
                 acc[curr._id] = curr.name;
                 return acc;
             }, {});
             setUnivKeyValue(univkeyvalueObj);
             const names = Object.values(univkeyvalueObj);
-            setUnivNames(names)
-
+            setUnivNames(names);
         } catch (error) {
             console.error('Error fetching users:', error);
         }
-    }
-
-
-
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -85,12 +79,12 @@ function Register() {
             'id': id,
             'role': role,
             'password': password
-        }
+        };
 
         try {
-            const _id = univkeyvalue[univName]
+            const _id = univkeyvalue[univName];
 
-            const response = await fetch('http://localhost:3001/register', {
+            const response = await fetch(`${ENDPOINT}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ fname, lname, univName, id, email, role, password, _id }),
@@ -98,23 +92,36 @@ function Register() {
 
             if (response.ok) {
                 setMessage('Registered successfully');
-                const path ='/'
-                navigate(path)
+                // Delay navigation by 4 seconds
+                setTimeout(() => {
+                    const path = '/';
+                    navigate(path);
+                }, 4000);
+                // Start countdown
+                startCountdown();
             } else {
                 const dataStatus = await response.text();
-                const responseObject = JSON.parse(dataStatus)
-                console.log(responseObject.message)
-                setMessage(responseObject.message)
-
+                const responseObject = JSON.parse(dataStatus);
+                console.log(responseObject.message);
+                setMessage(responseObject.message);
             }
-            return
+            return;
         } catch (error) {
             console.error('Error registering user:', error);
             setMessage('An error occurred. Please try again later.');
         }
-
     };
 
+    const startCountdown = () => {
+        let timer = setInterval(() => {
+            setCountdown((prevCountdown) => prevCountdown - 1);
+        }, 1000);
+
+        // Clear the interval when countdown reaches 0
+        setTimeout(() => {
+            clearInterval(timer);
+        }, 4000);
+    };
 
     return (
         <div className="d-flex flex-column flex-md-row align-items-center justify-content-center" style={{ backgroundColor: backgroundColor, minHeight: '100vh' }}>
@@ -204,7 +211,7 @@ function Register() {
                             <option value="professor">Professor</option>
                             <option value="student">Student</option>
                         </select>
-                    </div> 
+                    </div>
                     <div className="mt-2 form-group">
                         <label htmlFor="exampleInputPassword1">Password</label>
                         <input
@@ -234,7 +241,8 @@ function Register() {
                         Register
                     </button>
                     <p className='mt-2 '>Back to login page <Link to='/'>Login</Link></p>
-                    {message && <p className=''>{message}</p>}
+                    {message && <div><p className='text-center text-success'>{message}</p></div> } 
+                    {message == 'Registered successfully' && <div><p className="text-center text-success">Redirecting to Login page in {countdown} seconds...</p></div>}
                 </form>
             </div>
         </div>

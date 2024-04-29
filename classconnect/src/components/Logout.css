@@ -1,0 +1,5 @@
+/* Inside Logout.css */
+.ant-btn:hover {
+    background-color: initial !important;
+    color: initial !important;
+}

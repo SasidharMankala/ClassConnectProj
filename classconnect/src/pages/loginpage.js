@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import ENDPOINT from '../endpoint';
 
 
 function Login() {
@@ -23,33 +24,33 @@ function Login() {
     useEffect(() => {
         fetchUnivnames()
         fetchData()
-        if(loginData){
-            validateLogin()
+        if (loginAvailable) {
+            // validateLogin(loginData.role)
             routetoHome()
         }
-        if(Cookies.get('role')=='professor' || Cookies.get('role'=='student')){
-            console.log('hi')
+        if (Cookies.get('role') == 'professor' || Cookies.get('role' == 'student')) {
             routetoHome()
-        } 
-        if(Cookies.get('role')=='admin'){
+        }
+        if (Cookies.get('role') == 'admin') {
             routetoAdmin()
         }
     }, [loginData])
 
-    const routetoAdmin=()=>{
-        let path ='/adminpanel'
+    const routetoAdmin = () => {
+        let path = '/adminpanel'
         navigate(path)
     }
 
     const fetchData = async () => {
-        const users = await axios.get('http://localhost:3001/univnames')
-        console.log(users.data)
+        const users = await axios.get(`${ENDPOINT}/univnames`)
+        // console.log(users.data)
         setData(users.data)
+        // console.log(users.data)
     }
 
     const fetchUnivnames = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/univnames')
+            const response = await axios.get(`${ENDPOINT}/univnames`)
             const univkeyvalueObj = response.data.reduce((acc, curr) => {
                 acc[curr._id] = curr.name;
                 return acc;
@@ -61,65 +62,90 @@ function Login() {
             console.error('Error fetching users:', error);
         }
     }
-    function validateLogin() {
+    function validateLogin(role) {
         for (let i = 0; i < data.length; i++) {
             const university = data[i];
-            if (university.name === loginData.univName) {
+            if (university.name === univName) {
                 // Check if email and password match
-                for (let j = 0; j < university.users.admins.length; j++) {
-                    const admin = university.users.admins[j];
-                    console.log('admin', admin)
-                    console.log('login', loginData.email, loginData.password)
-                    if (admin.email === loginData.email && admin.password === loginData.password) {
-                        // Update login available state if login data is found
-                        Cookies.set('email',loginData.email,{ expires: 1 })
-                        Cookies.set('password',loginData.password,{ expires: 1 })
-                        Cookies.set('role',role,{ expires: 1 })
-                        Cookies.set('univname',univName,{ expires: 1 })
-                        setloginmessage('Login Succesfull')
-                        setLoginAvailable(true);
-                        return;
+                if (role === 'admin') {
+                    for (let j = 0; j < university.users.admins.length; j++) {
+                        const admin = university.users.admins[j];
+                        // console.log('admin', admin)
+                        // console.log('login', loginData.email, loginData.password)
+                        if (admin.email === email && admin.password === password) {
+                            // Update login available state if login data is found
+                            Cookies.set('email', email, { expires: 1 })
+                            // Cookies.set('password',loginData.password,{ expires: 1 })
+                            Cookies.set('role', role, { expires: 1 })
+                            Cookies.set('univname', univName, { expires: 1 })
+                            setloginmessage('Login Succesfull')
+                            setLoginAvailable(true);
+                            
+                        } else {
+                            setLoginAvailable(false);
+                            setloginmessage("Email or password doesn't match | User doesn't exists")
+                        }
                     }
                 }
                 // If admin not found, check professors
-                for (let j = 0; j < university.users.professors.length; j++) {
-                    const professor = university.users.professors[j];
-                    console.log('professor', professor)
-                    console.log('login', loginData.email, loginData.password)
-                    if (professor.email === loginData.email && professor.password === loginData.password) {
-                        // Update login available state if login data is found
-                        Cookies.set('email',loginData.email,{ expires: 1 })
-                        Cookies.set('password',loginData.password,{ expires: 1 })
-                        Cookies.set('role',role,{ expires: 1 })
-                        Cookies.set('univname',univName,{ expires: 1 })
-                        setloginmessage('Login Succesfull')
-                        setLoginAvailable(true);
-                        return;
+                else if (role === 'professor') {
+                    for (let j = 0; j < university.users.professors.length; j++) {
+                        const professor = university.users.professors[j];
+                        // console.log('professor', professor)
+                        // console.log('login', loginData.email, loginData.password)
+                        if (professor.email === email && professor.password === password) {
+                            // Update login available state if login data is found
+                            // console.log('professor', professor.courses_created.courses)
+                            var courses = JSON.stringify(professor.courses_created.courses)
+                            Cookies.set('courses', courses, { expires: 1 })
+                            // console.log(Cookies.get('courses'))
+                            Cookies.set('email', email, { expires: 1 })
+                            // Cookies.set('password',loginData.password,{ expires: 1 })
+                            Cookies.set('role', role, { expires: 1 })
+                            Cookies.set('univname', univName, { expires: 1 })
+                            setloginmessage('Login Succesfull')
+                            // setLoginAvailable(true);
+                            
+                        } else {
+                            setLoginAvailable(false);
+                            setloginmessage("Email or password doesn't match | User doesn't exists")
+                        }
                     }
                 }
                 // If admin and professor not found, check students
-                for (let j = 0; j < university.users.students.length; j++) {
-                    const student = university.users.students[j];
-                    if (student.email === loginData.email && student.password === loginData.password) {
-                        // Update login available state if login data is found
-                        Cookies.set('email',loginData.email,{ expires: 1 })
-                        Cookies.set('password',loginData.password,{ expires: 1 })
-                        Cookies.set('role',role,{ expires: 1 })
-                        Cookies.set('univname',univName,{ expires: 1 })
-                        setloginmessage('Login Succesfull')
-                        setLoginAvailable(true);
-                        return;
+                else {
+                    for (let j = 0; j < university.users.students.length; j++) {
+                        const student = university.users.students[j];
+                        if (student.email === email && student.password === password) {
+                            // Update login available state if login data is found
+                            var courses = JSON.stringify(student.courses_enrolled.courses)
+                            Cookies.set('courses', courses, { expires: 1 })
+                            // Cookies.set('lavda','stud',{ expires: 1 })
+                            Cookies.set('email', email, { expires: 1 })
+                            // Cookies.set('password',loginData.password,{ expires: 1 })
+                            Cookies.set('role', role, { expires: 1 })
+                            Cookies.set('univname', univName, { expires: 1 })
+                            setloginmessage('Login Succesfull')
+                            setLoginAvailable(true);
+                          
+                        }
+                        else {
+                            setLoginAvailable(false);
+                            setloginmessage("Email or password doesn't match | User doesn't exists")
+                        }
                     }
                 }
             }
         }
         // If login data not found in any university, set login available state to false
-        setLoginAvailable(false);
-        setloginmessage("Email or password doesn't match | User doesn't exists")
-        console.log(loginAvailable)
+
+        // console.log(loginAvailable)
     }
 
     
+    
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -129,13 +155,14 @@ function Login() {
         } else {
             setPasswordError("");
         }
-        console.log(role, email, password, univName);
+        // console.log(role, email, password, univName);
         setLoginData({
             univName: univName,
             role: role,
             email: email,
             password: password
         })
+        validateLogin(role)
 
     };
 
@@ -161,7 +188,7 @@ function Login() {
         <div className="d-flex flex-column flex-md-row align-items-center justify-content-center" style={{ backgroundColor: backgroundColor, minHeight: '100vh' }}>
             <img src="./full_logo.png" alt="Logo" className="img-fluid mx-auto d-block mb-4" />
             <div className="login-form container border rounded d-flex justify-content-center align-items-center p-4" style={{ maxWidth: '40%', backgroundColor: 'white' }}>
-                <form className="w-100" onSubmit={handleSubmit}>
+                <form className="w-100">
                     <div className="mt-2 form-group">
                         <p className="text-center fw-bold">Welcome!! Enter your login credentials</p>
                         <div className="mt-2 form-group">
@@ -219,11 +246,12 @@ function Login() {
                         />
                         {passwordError && <div className="text-danger">{passwordError}</div>}
                     </div>
-                    <button type="submit" className="btn btn-primary mt-3 w-100">
+                    {loginmessage && <div className="text-danger">{loginmessage}</div>}
+                    <button type="submit" className="btn btn-primary mt-3 w-100" onClick={handleSubmit}>
                         Login
                     </button>
                     <p className='mt-2 '>Don't have an account? <Link to='/register'>Register</Link></p>
-                    
+
                 </form>
             </div>
         </div>

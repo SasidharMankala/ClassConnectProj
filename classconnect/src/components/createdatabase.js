@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import ENDPOINT from '../endpoint';
 
 function CreateDatabase() {
     const [univName, setUnivName] = useState('');
@@ -9,7 +10,7 @@ function CreateDatabase() {
 
     const handleAddDB = async () => {
         try {
-            const response = await fetch('http://localhost:3001/universities', {
+            const response = await fetch(`${ENDPOINT}/universities`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ univName }),

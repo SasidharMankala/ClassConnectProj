@@ -21,8 +21,7 @@ const threadSchema = new mongoose.Schema({
               description: String,
               upvotes: Number,
               user_posted: String,
-              flagged: Boolean,
-              prof_marked_correct: Boolean
+              flagged: Boolean
             }
           ]
         }

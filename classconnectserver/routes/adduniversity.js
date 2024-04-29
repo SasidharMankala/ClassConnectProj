@@ -49,6 +49,8 @@ router.post('/universities', async (req, res) => {
     }
 });
 
+//route for delete database
+
 router.delete('/universities', async (req, res) => {
     try {
         const name = req.body.univName; // Assuming the name to be deleted is provided in the request body

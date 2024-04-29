@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ENDPOINT from "../endpoint";
 
 function DeleteClassCom(){
 
@@ -10,7 +11,7 @@ function DeleteClassCom(){
     const deletebuttonhandle = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch('http://localhost:3001/universities',{
+            const response = await fetch(`${ENDPOINT}/universities`,{
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ univName }),

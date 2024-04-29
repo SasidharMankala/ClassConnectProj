@@ -20,18 +20,23 @@ router.post('/add-course/:universityName/:professorEmail', async (req, res) => {
         const professor = university.users.professors.find(prof => prof.email === professorEmail);
         if (!professor) {
             throw new Error('Professor not found');
-        }
+        }  
 
         // Check if the course already exists
         const exists = professor.courses_created.courses;
         console.log(exists)
         console.log()
-        const isDuplicate = exists.some(data => data.courseId === courseData.courseId && data.courseName === courseData.courseName);
+        const isDuplicate = exists.some(data => data.id === courseData.courseId && data.name === courseData.courseName);
         console.log(isDuplicate)
         if (isDuplicate) {
             return res.status(400).json({ message: 'Course already exists' });
         }
-        professor.courses_created.courses.push(courseData);
+        const profpushData = {
+            'id': courseData.courseId,
+            'name': courseData.courseName
+        }
+        professor.courses_created.courses.push(profpushData);
+        // console.log(professor.courses_created.courses)
         // console.log('before',university)
         await Course.updateOne({ name: universityName }, { $set: university });
         // console.log(university)

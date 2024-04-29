@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 
 const app = express();
@@ -36,6 +37,51 @@ app.use('/',addclass)
 
 const deleteclass = require('./routes/deleteclass')
 app.use('/',deleteclass)
+
+const addThreads = require('./routes/addthreads')
+app.use('/',addThreads)
+
+const joinClass = require('./routes/joinClass')
+app.use('/',joinClass)
+
+const addThreadReplies = require('./routes/addthreadreplies')
+app.use('/',addThreadReplies)
+
+const deleteThread = require('./routes/deletethread')
+app.use('/',deleteThread)
+
+const deleteReplyThreads = require('./routes/deletereplythreads')
+app.use('/',deleteReplyThreads)
+
+const upvote = require('./routes/upvote')
+app.use('/',upvote)
+
+const upvoteReply = require('./routes/upvotereply')
+app.use('/',upvoteReply)
+
+const setcorrect = require('./routes/setcorrect')
+app.use('/',setcorrect)
+
+const flagThread = require('./routes/flagthread')
+app.use('/',flagThread)
+
+const flagReplyThreads = require('./routes/flagreplythreads')
+app.use('/',flagReplyThreads)
+
+
+const _dirname = path.dirname("")
+const buildPath = path.join(__dirname, "../classconnect/build");
+
+app.use(express.static(buildPath));
+
+app.get("/*", function(req, res) {
+    res.sendFile(path.join(buildPath, "index.html"), function (err) {
+        if (err) {
+            res.status(500).send(err);
+        }
+    });
+});
+
 
 
 app.listen(PORT, () => {
